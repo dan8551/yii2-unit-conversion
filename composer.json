@@ -1,0 +1,30 @@
+{
+    "name": "dan8551/yii2-unit-conversion",
+    "description": "Simple conversion of units",
+    "keywords": ["yii2", "extension", "unit conversion", "plugin"],
+    "homepage": "https://github.com/dan8551/yii2-unit-conversion",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Daniel Orton",
+            "email": "dan.orton84@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev":{
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "dan8551\\components\\unit_conversion\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "dan8551\\components\\unit_conversion\\Tests\\" : "tests"
+        }
+    }
+}
+
