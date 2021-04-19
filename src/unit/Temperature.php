@@ -22,36 +22,36 @@ class Temperature extends BaseUnit
     {
         $unitArr = [
             self::TEMP_UNIT_C => [
-                'name' => 'celsius',
+                'name' => 'Celsius',
                 'abbr' => '°C',
                 'conversionToBase' => ['*',1],
                 'conversionFromBase' => ['*',1],
             ],
             self::TEMP_UNIT_F => [
-                'name' => 'farenheit',
+                'name' => 'Farenheit',
                 'abbr' => '°F',
-                'conversionToBase' => ['()',function(){
-                    return ($this->value - 32) * (5/9);
+                'conversionToBase' => ['()',function($value){
+                    return ($value - 32) * (5/9);
                 }],
-                'conversionFromBase' => ['()',function(){
-                    return ($this->value * (9/5)) + 32;
+                'conversionFromBase' => ['()', function($value):float{
+                    return ($value * (9/5)) + 32;
                 }],
             ],
             self::TEMP_UNIT_R => [
-                'name' => 'rankine',
+                'name' => 'Rankine',
                 'abbr' => '°R',
-                'conversionToBase' => ['()', function(){
-                    return ($this->value - 491.67) * (5/9) ;
+                'conversionToBase' => ['()', function($value){
+                    return ($value - 491.67) * (5/9) ;
                 }],
-                'conversionFromBase' => ['()', function(){
-                    return ($this->value + 273.15) * (9/5);
+                'conversionFromBase' => ['()', function($value){
+                    return ($value + 273.15) * (9/5);
                 }]
             ],
             self::TEMP_UNIT_K => [
                 'name' => 'Kelvin',
                 'abbr' => 'K',
-                'conversionToBase' => ['+', 273.15],
-                'conversionFromBase' => ['-', 273.15]
+                'conversionToBase' => ['-', 273.15],
+                'conversionFromBase' => ['+', 273.15]
             ],
         ];
         return $unit == null ? $unitArr : $unitArr[$unit];

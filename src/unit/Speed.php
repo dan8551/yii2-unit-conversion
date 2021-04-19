@@ -9,8 +9,7 @@ class Speed extends BaseUnit
     const SPEED_UNIT_MPH = 3;
     const SPEED_UNIT_FTS = 4;
     const SPEED_UNIT_KNOT_UK = 5;
-    
-    const SPEED_UNIT_SOL = 6;
+    const SPEED_UNIT_KNOT_NM = 6;
     
     /**
      * returns array of units that can be used in the format:
@@ -26,7 +25,7 @@ class Speed extends BaseUnit
         $unitArr = [
             self::SPEED_UNIT_MPS => [
                 'name' => 'meters per second',
-                'abbr' => 'm/s',
+                'abbr' => 'mps',
                 'conversionToBase' => ['*',1],
                 'conversionFromBase' => ['*',1],
             ],
@@ -39,8 +38,8 @@ class Speed extends BaseUnit
             self::SPEED_UNIT_MPH => [
                 'name' => 'miles per hour',
                 'abbr' => 'mph',
-                'conversionToBase' => ['/', 0.44704],
-                'conversionFromBase' => ['*', 0.44704]
+                'conversionToBase' => ['*', 0.44704],
+                'conversionFromBase' => ['/', 0.44704]
             ],
             self::SPEED_UNIT_FTS => [
                 'name' => 'feet per second',
@@ -49,23 +48,17 @@ class Speed extends BaseUnit
                 'conversionFromBase' => ['/', 0.3048]
             ],
             self::SPEED_UNIT_KNOT_UK => [
-                'name' => 'knot',
+                'name' => 'knot (uk)',
                 'abbr' => 'kn',
                 'conversionToBase' => ['*', 0.5148],
                 'conversionFromBase' => ['/', 0.5148]
             ],
             self::SPEED_UNIT_KNOT_NM => [
-                'name' => 'knot',
+                'name' => 'knot (nmi)',
                 'abbr' => 'kn',
                 'conversionToBase' => ['*', 0.5144444],
                 'conversionFromBase' => ['/', 0.5144444]
-            ],
-            self::SPEED_UNIT_SOL => [
-                'name' => 'speed of light (vacuum)',
-                'abbr' => 'c',
-                'conversionToBase' => ['*', 299792458],
-                'conversionFromBase' => ['/', 299792458]
-            ],
+            ]
         ];
         return $unit == null ? $unitArr : $unitArr[$unit];
     }

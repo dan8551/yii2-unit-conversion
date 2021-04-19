@@ -34,13 +34,13 @@ class Length extends BaseUnit
                 'conversionFromBase' => ['*',1],
             ],
             self::LENGTH_UNIT_CM => [
-                'name' => 'centimeters',
+                'name' => 'centimeter',
                 'abbr' => 'cm',
                 'conversionToBase' => ['/',100],
                 'conversionFromBase' => ['*',100],
             ],
             self::LENGTH_UNIT_DM => [
-                'name' => 'decimeters',
+                'name' => 'decimeter',
                 'abbr' => 'dm',
                 'conversionToBase' => ['/', 10],
                 'conversionFromBase' => ['*', 10]
@@ -52,7 +52,7 @@ class Length extends BaseUnit
                 'conversionFromBase' => ['/', 1000]
             ],
             self::LENGTH_UNIT_MM => [
-                'name' => 'millimeters',
+                'name' => 'millimeter',
                 'abbr' => 'mm',
                 'conversionToBase' => ['/', 1000],
                 'conversionFromBase' => ['*', 1000]
@@ -60,32 +60,32 @@ class Length extends BaseUnit
             self::LENGTH_UNIT_FT => [
                 'name' => 'foot',
                 'abbr' => 'ft',
-                'conversionToBase' => ['*', 0.3048],
-                'conversionFromBase' => ['/', 0.3048]
+                'conversionToBase' => ['/', 3.28084],
+                'conversionFromBase' => ['*', 3.28084]
             ],
             self::LENGTH_UNIT_IN => [
-                'name' => 'inches',
+                'name' => 'inch',
                 'abbr' => 'in',
                 'conversionToBase' => ['*', 0.0254],
                 'conversionFromBase' => ['/', 0.0254]
             ],
             self::LENGTH_UNIT_MI => [
-                'name' => 'miles',
+                'name' => 'mile',
                 'abbr' => 'mi',
-                'conversionToBase' => ['*', 0.0006213712],
-                'conversionFromBase' => ['/', 0.0006213712]
+                'conversionToBase' => ['/', 0.0006213712],
+                'conversionFromBase' => ['*', 0.0006213712]
             ],
             self::LENGTH_UNIT_NMI => [
-                'name' => 'nautical miles',
+                'name' => 'nautical mile',
                 'abbr' => 'nmi',
-                'conversionToBase' => ['*', 0.0005399568],
-                'conversionFromBase' => ['/', 0.0005399568]
+                'conversionToBase' => ['/', 0.0005399568],
+                'conversionFromBase' => ['*', 0.0005399568]
             ],
             self::LENGTH_UNIT_YD => [
                 'name' => 'yard',
                 'abbr' => 'yd',
-                'conversionToBase' => ['*', 1.093613],
-                'conversionFromBase' => ['/', 1.093613]
+                'conversionToBase' => ['/', 1.093613],
+                'conversionFromBase' => ['*', 1.093613]
             ],
         ];
         return $unit == null ? $unitArr : $unitArr[$unit];

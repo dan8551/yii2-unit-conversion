@@ -24,11 +24,28 @@ class BaseUnit
     public function __construct(?float $value=null, ?string $unit=null) 
     {
         $this->value = $value;
-        for($i=1;$i<=length($this->units());$i++)
+        if(isset($unit))
+            $this->unit = $this->unitIndex($unit);
+//        for($i=1;$i<=count($this->units());$i++)
+//        {
+//            if(array_search($unit, $this->units()[$i]))
+//                $this->unit = $i;
+//        }
+    }
+    
+    /**
+     * Find the corresponding array index for a given unit string
+     * @param string $unit
+     * @return int index of [[units()]]
+     */
+    public function unitIndex(string $unit):int
+    {
+        for($i=1;$i<=count($this->units());$i++)
         {
             if(array_search($unit, $this->units()[$i]))
-                $this->unit = $this->units()[$i];
+                return $i;
         }
+        return 0;
     }
     
     /**
@@ -52,7 +69,7 @@ class BaseUnit
      */
     public function unitName()
     {
-        return $this->unitType->unitName();    
+        return $this->units($this->unit)['name'];
 
     }
     
@@ -62,7 +79,7 @@ class BaseUnit
      */
     public function unitAbbr()
     {
-        return $this->unitType->unitAbbr();
+        return $this->units($this->unit)['abbr'];
     }
     
     /**
@@ -72,39 +89,62 @@ class BaseUnit
      */
     public function to(string $newUnit)
     {
-        $baseValue = float;
+        $baseValue;
         $convertToBase = $this->units($this->unit)['conversionToBase'];
+//        codecept_debug('Old Unit: '.$this->unitAbbr());
+//        codecept_debug('New Unit: '.$newUnit);
+//        codecept_debug($convertToBase[0].' '.$convertToBase[1]);
         switch($convertToBase[0])
         {
             case '*':
-                $baseValue = $this->multiply($this->units($this->unit)['conversionToBase'][1]);
+//                codecept_debug('Multiply');
+                $this->value = $this->multiply($convertToBase[1]);
                 break;
             case '/':
-                $baseValue = $this->divide($this->units($this->unit)['conversionToBase'][1]);
+//                codecept_debug('Divide');
+                $this->value = $this->divide($convertToBase[1]);
                 break;
             case '+':
-                $baseValue = $this->plus($this->units($this->unit)['conversionToBase'][1]);
+//                codecept_debug('Add');
+                $this->value = $this->plus($convertToBase[1]);
                 break;
             case '-':
-                $baseValue = $this->minus($this->units($this->unit)['conversionToBase'][1]);
+//                codecept_debug('Minus');
+                $this->value = $this->minus($convertToBase[1]);
+                break;
+            case '()':
+//                codecept_debug('Function');
+                $this->value = $convertToBase[1]($this->value);
                 break;
         }
-        $convertToNewUnit = $this->units($newUnit)['conversionFromBase'];
-        switch($convertToBase[0])
+        $convertToNewUnit = $this->units($this->unitIndex($newUnit))['conversionFromBase'];
+//        codecept_debug($convertToNewUnit[0].' '.$convertToNewUnit[1]);
+//        codecept_debug('Value: '.$this->value);
+        switch($convertToNewUnit[0])
         {
             case '*':
-                $this->value = $this->multiply($this->units($this->unit)['conversionFromBase'][1]);
+//                codecept_debug('Multiply');
+                $this->value = $this->multiply($convertToNewUnit[1]);
                 break;
             case '/':
-                $this->value = $this->divide($this->units($this->unit)['conversionFromBase'][1]);
+//                codecept_debug('Divide');
+                $this->value = $this->divide($convertToNewUnit[1]);
                 break;
             case '+':
-                $this->value = $this->plus($this->units($this->unit)['conversionFromBase'][1]);
+//                codecept_debug('Add');
+                $this->value = $this->plus($convertToNewUnit[1]);
                 break;
             case '-':
-                $this->value = $this->minus($this->units($this->unit)['conversionFromBase'][1]);
+//                codecept_debug('Minus');
+                $this->value = $this->minus($convertToNewUnit[1]);
+                break;
+            case '()':
+//                codecept_debug('Function');
+                $this->value = $convertToNewUnit[1]($this->value);
                 break;
         }
+        $this->unit = $this->unitIndex($newUnit);
+//        codecept_debug($this->value);
         return $this->value;
     }
     
@@ -115,7 +155,8 @@ class BaseUnit
      */
     public function multiply(float $conversionValue):float
     {
-        return $this->value * $conversionValue;
+//        codecept_debug($conversionValue);
+        return ($this->value * $conversionValue);
     }
     
     /**
@@ -125,7 +166,7 @@ class BaseUnit
      */
     public function divide(float $conversionValue):float
     {
-        return $this->value / $conversionValue;
+        return ($this->value / $conversionValue);
     }
     
     /**
@@ -146,5 +187,30 @@ class BaseUnit
     public function minus(float $conversionValue):float
     {
         return $this->value - $conversionValue;
+    }
+    
+    /**
+     * 
+     * @param float|null $newValue
+     * @param float|null $newUnit
+     * @return float current value
+     */
+    public function value(?float $newValue=null, ?string $newUnit=null):float
+    {
+        if(isset($newValue))
+            $this->value = $newValue;
+        if(isset($newUnit))
+            $this->unit = $this->unitIndex ($newUnit);
+        return $this->value;
+    }
+    
+    /**
+     * 
+     * @param float $value
+     * @return void
+     */
+    public function setValue(float $value):void
+    {
+        $this->value = $value;
     }
 }

@@ -31,37 +31,37 @@ class Energy extends BaseUnit
     {
         $unitArr = [
             self::ENERGY_UNIT_J => [
-                'name' => 'joules',
+                'name' => 'Joule',
                 'abbr' => 'J',
                 'conversionToBase' => ['*',1],
                 'conversionFromBase' => ['*',1],
             ],
             self::ENERGY_UNIT_KJ => [
-                'name' => 'kilojoules',
+                'name' => 'kilojoule',
                 'abbr' => 'kJ',
                 'conversionToBase' => ['*',1000],
                 'conversionFromBase' => ['/',1000],
             ],
             self::ENERGY_UNIT_MILLIJ => [
-                'name' => 'millijoules',
+                'name' => 'millijoule',
                 'abbr' => 'mJ',
                 'conversionToBase' => ['/',1000],
                 'conversionFromBase' => ['*',1000],
             ],
             self::ENERGY_UNIT_MEGAJ => [
-                'name' => 'megajoules',
+                'name' => 'megajoule',
                 'abbr' => 'MJ',
                 'conversionToBase' => ['*', 1000000],
                 'conversionFromBase' => ['/', 1000000]
             ],
             self::ENERGY_UNIT_GJ => [
-                'name' => 'gigajoules',
+                'name' => 'gigajoule',
                 'abbr' => 'GJ',
                 'conversionToBase' => ['*', 1000000000],
                 'conversionFromBase' => ['/', 1000000000]
             ],
             self::ENERGY_UNIT_WH => [
-                'name' => 'watt-hour',
+                'name' => 'Watt-hour',
                 'abbr' => 'Wh',
                 'conversionToBase' => ['*', 3600],
                 'conversionFromBase' => ['/', 3600]
@@ -75,20 +75,20 @@ class Energy extends BaseUnit
             self::ENERGY_UNIT_MWH => [
                 'name' => 'megawatt-hour',
                 'abbr' => 'MWh',
-                'conversionToBase' => ['*', 3,600,000,000],
-                'conversionFromBase' => ['/', 3,600,000,000]
+                'conversionToBase' => ['*', 3600000000],
+                'conversionFromBase' => ['/', 3600000000]
             ],
             self::ENERGY_UNIT_BTU => [
-                'name' => 'BTU',
+                'name' => 'British Thermal Unit',
                 'abbr' => 'BTU',
-                'conversionToBase' => ['*', 1055.05585262],
-                'conversionFromBase' => ['*', 0.00094781712]
+                'conversionToBase' => ['*', 0.0009478171],
+                'conversionFromBase' => ['*', 0.0009478171]
             ],
             self::ENERGY_UNIT_KBTU => [
-                'name' => 'kiloBTU',
+                'name' => 'kilo British Thermal Unit',
                 'abbr' => 'kBTU',
-                'conversionToBase' => ['*', 1.05505585262],
-                'conversionFromBase' => ['/', 0.94781712]
+                'conversionToBase' => ['*', 0.9478171],
+                'conversionFromBase' => ['/', 0.9478171]
             ],
         ];
         return $unit == null ? $unitArr : $unitArr[$unit];
